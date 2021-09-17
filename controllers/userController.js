@@ -36,7 +36,7 @@ class UserController {
             )
             const token = generateJwt(appUser.id, name, email)
 
-            return res.json({access_token:token, name:appUser.name})
+            return res.json({access_token:token, name:appUser.id})
         }catch (e){
             next(ApiError.badRequest(e.message))
         }
@@ -53,7 +53,7 @@ class UserController {
                 return next(ApiError.internal('Пароль некорректен'))
             }
             const token = generateJwt(author.id, author.name, author.email)
-            return res.json({access_token:token, name:author.name})
+            return res.json({access_token:token, name:author.id})
         }catch (e){
             next(ApiError.badRequest(e.message))
         }
