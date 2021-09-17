@@ -29,10 +29,11 @@ class ProjectController {
         }
     }
     async getAll(req, res) {
+        let stages;
         try {
             let result = await Project.findAll()
             for (let pr of result) {
-                let stages = StageController._get(pr.id);
+                stages = StageController._get(pr.id);
                 for (let st of stages){
                     let task = TaskController._get(st.id);
                     for (let t of task) {
@@ -51,7 +52,7 @@ class ProjectController {
             return res.json(result);
         }catch (e) {
             console.log(e)
-            return JSON.stringify(e)
+            return JSON.stringify({e, stages})
         }
     }
     async _getAll(){
