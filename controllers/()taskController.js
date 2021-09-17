@@ -50,6 +50,7 @@ class TaskController{
             return res.json(result);
         }catch (e) {
             console.log(e)
+            return res.json(e)
         }
     }
     async _get(id){
