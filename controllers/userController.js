@@ -29,7 +29,7 @@ class UserController {
             }
             const hashPassword = await bcrypt.hash(password, 5)
             let appUser = await AppUser.create({name, email, password: hashPassword})
-            const defWorker = await WorkerController.create({userId: appUser.id, workerRoleId: 0}, {}, {});
+            const defWorker = await WorkerController.create({userId: appUser.id, workerRoleId: 0}, {}, next);
             const id = appUser.id;
             appUser = AppUser.findOne(
                 {where: {id}}
