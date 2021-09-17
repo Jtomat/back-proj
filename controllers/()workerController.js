@@ -16,7 +16,7 @@ class WorkerController {
     }
 
     async _getByUser(appuserId){
-        let wr = await res.json(Worker.findAll());
+        let wr = await Worker.findAll();
         return wr.find(item=>item.appuserId===appuserId);
     }
 
