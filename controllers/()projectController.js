@@ -34,9 +34,10 @@ class ProjectController {
         let user;
         let role;
         let result;
+        let rest;
         try {
             result = (await Project.findAll());
-            res = [];
+            rest = [];
             for (let pr =0; pr< result.length; pr++) {
                 stages = await StageController._get(pr.id);
                 let stg = []
@@ -53,9 +54,9 @@ class ProjectController {
                     }
                    stg.push({...stages[st], tasks:tsk});
                 }
-                res.push({...result[pr], stages:stg});
+                rest.push({...result[pr], stages:stg});
             }
-            return res.json(res);
+            return res.json(rest);
         }catch (e) {
             console.log(e)
             return res.json({e, result, stages, worker, user, role})
