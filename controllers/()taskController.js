@@ -40,8 +40,8 @@ class TaskController{
     async _getAll(req, res) {
         try {
             let result = {};
-            let {appuserId} = req.params;
-            const worker = WorkerController._get(appuserId);
+            let {id} = req.params;
+            const worker = WorkerController._get(id);
             const task = await Task.findAll({where: {[Op.and]: [{workerId: worker.id}]}})
             for (const t of task){
                 t.diff = (new Date(t.dateEnd) - new Date()).valueOf() % 3
