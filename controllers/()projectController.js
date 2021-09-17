@@ -53,6 +53,7 @@ class ProjectController {
                         tsk.push({...task[t], worker:workered});
                     }
                    stg.push({...stages[st], tasks:tsk});
+                    return  res.json(stg)
                 }
                 rest.push({...result[pr], stages:stg});
             }
