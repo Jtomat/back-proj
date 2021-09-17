@@ -36,21 +36,21 @@ class ProjectController {
         let result;
         try {
             result = await Project.findAll()
-            for (let pr of result) {
+            for (let pr =0; pr< result.length; pr++) {
                 stages = await StageController._get(pr.id);
-                for (let st of stages){
-                    let task = await TaskController._get(st.id);
-                    for (let t of task) {
-                        worker = await WorkerController._get(t.workerId);
+                for (let st = 0; st < stages.length; st++){
+                    let task = await TaskController._get(stages[st].id);
+                    for (let t =0;t< task.length;t++) {
+                        worker = await WorkerController._get(task[t].workerId);
                         user = await UserController._get(worker.appuserId)
                         role = await WorkerRoleController._get(worker.workerRoleId)
                         worker.user = user;
                         worker.workerRole = role;
-                        task.worker = worker;
+                        task[t].worker = worker;
                     }
-                    st.tasks = task;
+                    stages[st].tasks = task;
                 }
-                pr.stages = stages;
+                result[pr].stages = stages;
             }
             return res.json(result);
         }catch (e) {
