@@ -40,6 +40,8 @@ class ProjectController {
             rest = [];
             for (let pr =0; pr< result.length; pr++) {
                 stages = await StageController._get(pr.id);
+
+                return res.json({stages});
                 let stg = []
                 for (let st = 0; st < stages.length; st++){
                     let task = await TaskController._get(stages[st].id);
