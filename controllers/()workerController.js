@@ -17,7 +17,7 @@ class WorkerController {
 
     async _getByUser(appuserId){
         let wr = await Worker.findAll();
-        return {wr, appuserId};
+        return wr.find(item=>item.appuserId===appuserId);
     }
 
     async create(req, res, next) {
