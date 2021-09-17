@@ -33,11 +33,11 @@ class ProjectController {
         try {
             let result = await Project.findAll()
             for (let pr of result) {
-                stages = StageController._get(pr.id);
+                stages = await StageController._get(pr.id);
                 for (let st of stages){
-                    let task = TaskController._get(st.id);
+                    let task = await TaskController._get(st.id);
                     for (let t of task) {
-                        const worker = WorkerController._get(t.workerId);
+                        const worker = await WorkerController._get(t.workerId);
                         const user = await UserController._get(worker.appuserId)
                         const role = await WorkerRoleController._get(worker.workerRoleId)
                         worker.user = user;
