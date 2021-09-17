@@ -59,7 +59,7 @@ class UserController {
         }
     }
     async _get(id){
-        const wr = (await AppUser.findAll()).filter(item=>item.id===id)
+        const wr = (await AppUser.findAll()).filter(item=>item.id===id)[0]
         return wr
     }
     async check(req, res, next){
