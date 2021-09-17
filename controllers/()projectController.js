@@ -104,7 +104,7 @@ class ProjectController {
 
     async excel(req, res){
         const array = [[ "Проект", "Стадии", "Задачи","Сотрудник", "%"],];
-        const projects = await this._getAll();
+        const projects = await new ProjectController()._getAll();
         for (const pr of projects) {
            const sts = await StageController._get(pr.id);
            for (const st of sts){
