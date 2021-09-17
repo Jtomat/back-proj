@@ -1,7 +1,7 @@
 const sequelize = require('../db')
 const {DataTypes} = require('sequelize')
 
-const AppUser = sequelize.define('appUser', {
+const AppUser = sequelize.define('appuser', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true,},
     name: {type: DataTypes.STRING, allowNull: false},
     email: {type: DataTypes.STRING, unique: true, allowNull: false},
@@ -13,7 +13,7 @@ const WorkerRole = sequelize.define('worker_role',{
     name: {type: DataTypes.STRING, allowNull: false},
     rate: {type: DataTypes.INTEGER, allowNull: false, defaultValue: 2,},
 })
-const Worker = sequelize.define('Worker', {
+const Worker = sequelize.define('worker', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true,},
     // Роль + пользователь
 })
