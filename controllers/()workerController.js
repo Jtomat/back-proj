@@ -16,15 +16,8 @@ class WorkerController {
     }
 
     async _getByUser(appuserId){
-        const props = ['appuserId'];
-        const array = [];
-        props.forEach((propName) => {
-            let obj = {};
-            obj[propName.toString()] = appuserId;
-            array.push(obj);
-        });
-        const wr = await Worker.findOne({where: {where: {[Op.and]: array}}})
-        return wr
+        let wr = await res.json(Worker.findAll());
+        return wr.find(item=>item.appuserId===appuserId);
     }
 
     async create(req, res, next) {
