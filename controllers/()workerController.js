@@ -26,9 +26,9 @@ class WorkerController {
     async update(req, res, next) {
         try{
             const {id} = req.params;
-            let { userId, workerRoleId } = req.body;
+            let { appuserId, workerRoleId } = req.body;
             const cur_wr = await Worker.findOne({where:{id}});
-            const wr = await cur_wr.update({appuserId:userId, workerRoleId: workerRoleId});
+            const wr = await cur_wr.update({appuserId:appuserId, workerRoleId: workerRoleId});
             return res.json({wr});
         }
         catch (e){
