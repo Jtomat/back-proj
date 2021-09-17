@@ -103,23 +103,27 @@ class ProjectController {
     }
 
     async excel(req, res){
-        const array = [[ "Проект", "Стадии", "Задачи","Сотрудник", "%"],];
-        const projects = await new ProjectController()._getAll();
-        for (const pr of projects) {
-           const sts = await StageController._get(pr.id);
-           for (const st of sts){
-               const tasks = await TaskController._get(st.id);
-               for (const task of tasks) {
-                   const worker = await WorkerController._get(task.workerId);
-                   let user = {};
-                   if (worker){
-                       user = await UserController._get(worker.userId);
-                   }
-                   array.push([pr.name, st.name, task.name, worker ? user.name : "Отсутствует", task.finished ])
-               }
-           }
+        try {
+            const array = [["Проект", "Стадии", "Задачи", "Сотрудник", "%"],];
+            const projects = await new ProjectController()._getAll();
+            for (const pr of projects) {
+                const sts = await StageController._get(pr.id);
+                for (const st of sts) {
+                    const tasks = await TaskController._get(st.id);
+                    for (const task of tasks) {
+                        const worker = await WorkerController._get(task.workerId);
+                        let user = {};
+                        if (worker) {
+                            user = await UserController._get(worker.userId);
+                        }
+                        array.push([pr?.name, st?.name, task?.name, worker ? user?.name : "Отсутствует", task?.finished])
+                    }
+                }
+            }
+            return res.json(array);
+        }catch (e) {
+            return res.json(e);
         }
-        return res.json(array);
     }
 }
 module.exports = new ProjectController()
