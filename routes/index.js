@@ -7,7 +7,7 @@ const taskRouter = require('./()taskRouter')
 
 
 router.use('/', userRouter);
-router.use('/', projectRouter);
+router.use('/project/', projectRouter);
 router.use('/', stageRouter);
 router.use('/', taskRouter);
     /*
