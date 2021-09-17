@@ -48,8 +48,7 @@ class ProjectController {
                         worker = await WorkerController._get(task[t].workerId);
                         user = await UserController._get(worker.appuserId)
                         role = await WorkerRoleController._get(worker.workerRoleId)
-                        let workered = {id:worker.id, user:user};
-                        workered = { id:workered.id, user: workered.user, workerRole: role};
+                        let workered = {id:worker.id, user:user, workerRole: role};
                         tsk.push({
                             id: task[t].id,
                             name: task[t].name,
