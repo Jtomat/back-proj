@@ -52,7 +52,6 @@ class ProjectController {
                 }
                 pr.stages = stages;
             }
-
             return res.json(result);
         }catch (e) {
             console.log(e)
