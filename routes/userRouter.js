@@ -2,6 +2,7 @@ const Router = require('express')
 const router = new Router()
 const userController = require('../controllers/userController')
 const roleController = require('../controllers/()workerRoleController')
+const workerController = require('../controllers/()workerController')
 const authMiddleware = require("../middleware/authMiddleware")
 
 router.post('/registration', userController.registration)
@@ -14,5 +15,6 @@ router.delete('/remove/:id', authMiddleware, userController.delete)
 router.put('/conf/roles/:id', roleController.update)
 router.post('/conf/roles/', roleController.create)
 router.delete('/conf/roles/:id', roleController.delete)
+router.put('/conf/worker/upd/:id', workerController.update)
 
 module.exports = router
