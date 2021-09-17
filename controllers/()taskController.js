@@ -53,7 +53,7 @@ class TaskController{
             return res.json({result, task, worker});
         }catch (e) {
             console.log(e)
-            return res.json({ task, worker, e})
+            return res.json({ req, task, worker, e})
         }
     }
     async _get(id){
