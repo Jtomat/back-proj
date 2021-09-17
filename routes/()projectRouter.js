@@ -3,12 +3,12 @@ const router = new Router()
 const projectController = require('../controllers/()projectController');
 
 
-router.post('/project/add', projectController.create)
-router.get('/project', projectController.getAll)
-router.get('/projects/excel', projectController.excel)
-router.get('/project/:id', projectController.getOne)
-router.delete('/project/remove/:id', projectController.delete)
-router.put('/project/edit/:id', projectController.update)
+router.post('/add', projectController.create)
+router.get('/', projectController.getAll)
+router.get('/excel', projectController.excel)
+router.get('/:id', projectController.getOne)
+router.delete('/remove/:id', projectController.delete)
+router.put('/edit/:id', projectController.update)
 
 
 module.exports = router
