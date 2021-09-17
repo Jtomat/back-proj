@@ -16,7 +16,7 @@ class WorkerController {
     }
 
     async _getByUser(appuserId){
-        const wr = await Worker.findOne({where: {appuserId}})
+        const wr = await Worker.findOne({where: {appuserId:appuserId}})
         return wr
     }
 
