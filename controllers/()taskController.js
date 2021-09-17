@@ -45,7 +45,7 @@ class TaskController{
             let result = {};
             id = req.params;
             worker = await WorkerController._getByUser(id.id);
-            task = await Task.findAll({where: {[Op.and]: [{workerId: worker.id}]}})
+            task = (await Task.findAll()).filter(item=>item.workerId === worker.id)
             for (let t of task){
                 t.diff = (new Date(t.dateEnd) - new Date()).valueOf() % 3
             }
