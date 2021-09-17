@@ -13,11 +13,15 @@ class ProjectController {
         }
     }
     async getOne(req, res){
-        const {id} = req.params
-        const proj = await Project.findOne(
-            {where:{id}}
-        )
-        return res.json(proj)
+        try {
+            const {id} = req.params
+            const proj = await Project.findOne(
+                {where: {id}}
+            )
+            return res.json(proj)
+        }catch (e) {
+            console.log(e)
+        }
     }
     async getAll(req, res) {
        return await res.json(Project.findAll());
@@ -35,11 +39,15 @@ class ProjectController {
         }
     }
     async delete(req, res){
-        const {id} = req.params
-        const proj = await Project.destroy(
-            {where: {id}},
-        )
-        return res.json(proj)
+        try {
+            const {id} = req.params
+            const proj = await Project.destroy(
+                {where: {id}},
+            )
+            return res.json(proj)
+        }catch (e) {
+            console.log(e)
+        }
     }
 }
 module.exports = new ProjectController()

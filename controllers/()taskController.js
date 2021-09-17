@@ -14,23 +14,31 @@ class TaskController{
         }
     }
     async getAll(req, res) {
-        let { workerId, stageId } = req.params;
-        const props = Object.getOwnPropertyNames(req.params);
-        const array = [];
-        props.forEach((propName) => {
-            let obj = {};
-            obj[propName.toString()] = req.params[propName];
-            array.push(obj);
-        });
-        const task = await Task.findAll({where:{[Op.and]: array}})
-        return res.json(task);
+        try {
+            let {workerId, stageId} = req.params;
+            const props = Object.getOwnPropertyNames(req.params);
+            const array = [];
+            props.forEach((propName) => {
+                let obj = {};
+                obj[propName.toString()] = req.params[propName];
+                array.push(obj);
+            });
+            const task = await Task.findAll({where: {[Op.and]: array}})
+            return res.json(task);
+        }catch (e) {
+            console.log(e)
+        }
     }
     async getOne(req, res) {
-        const {id} = req.params
-        const task = await Task.findOne(
-            {where:{id}}
-        )
-        return res.json(task)
+        try {
+            const {id} = req.params
+            const task = await Task.findOne(
+                {where: {id}}
+            )
+            return res.json(task)
+        }catch (e) {
+            console.log(e)
+        }
     }
     async update(req, res, next) {
         try{
@@ -45,11 +53,15 @@ class TaskController{
         }
     }
     async delete(req, res){
-        const {id} = req.params
-        const task = await Task.destroy(
-            {where: {id}},
-        )
-        return res.json(task)
+        try {
+            const {id} = req.params
+            const task = await Task.destroy(
+                {where: {id}},
+            )
+            return res.json(task)
+        }catch (e) {
+            console.log(e)
+        }
     }
 }
 module.exports = new TaskController();

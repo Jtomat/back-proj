@@ -17,23 +17,31 @@ class StageController{
         }
     }
     async getAll(req, res) {
-        let { projectId } = req.params;
-        const props = ['projectId'];
-        const array = [];
-        props.forEach((propName) => {
-            let obj = {};
-            obj[propName.toString()] = req.params[propName];
-            array.push(obj);
-        });
-        const stages = await Stage.findAll({where:{[Op.and]: array}})
-        return res.json(stages);
+        try {
+            let {projectId} = req.params;
+            const props = ['projectId'];
+            const array = [];
+            props.forEach((propName) => {
+                let obj = {};
+                obj[propName.toString()] = req.params[propName];
+                array.push(obj);
+            });
+            const stages = await Stage.findAll({where: {[Op.and]: array}})
+            return res.json(stages);
+        }catch (e) {
+            console.log(e)
+        }
     }
     async getOne(req, res) {
-        const {id} = req.params
-        const stage = await Stage.findOne(
-            {where:{id}}
-        )
-        return res.json(stage)
+        try {
+            const {id} = req.params
+            const stage = await Stage.findOne(
+                {where: {id}}
+            )
+            return res.json(stage)
+        }catch (e){
+            console.log(e)
+        }
     }
     async update(req, res, next) {
         try{
@@ -50,11 +58,15 @@ class StageController{
         }
     }
     async delete(req, res) {
-        const {id} = req.params
-        const st = await Stage.destroy(
-            {where: {id}},
-        )
-        return res.json(st)
+        try {
+            const {id} = req.params
+            const st = await Stage.destroy(
+                {where: {id}},
+            )
+            return res.json(st)
+        }catch (e) {
+            console.log(e)
+        }
     }
 }
 module.exports = new StageController();

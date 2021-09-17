@@ -38,70 +38,98 @@ class UserController {
 
             return res.json({token})
         }catch (e){
-            throw e;
+            next(ApiError.badRequest(e.message))
         }
     }
     async login(req, res, next){
-        const {email, password} = req.body
-        const author = await AppUser.findOne({where: {email}})
-        if(!author){
-            return next(ApiError.internal('Пользователь не найден'))
+        try {
+            const {email, password} = req.body
+            const author = await AppUser.findOne({where: {email}})
+            if (!author) {
+                return next(ApiError.internal('Пользователь не найден'))
+            }
+            let comparePassword = bcrypt.compareSync(password, author.password)
+            if (!comparePassword) {
+                return next(ApiError.internal('Пароль некорректен'))
+            }
+            const token = generateJwt(author.id, author.name, author.email)
+            return res.json({token})
+        }catch (e){
+            next(ApiError.badRequest(e.message))
         }
-        let comparePassword = bcrypt.compareSync(password, author.password)
-        if(!comparePassword){
-            return next(ApiError.internal('Пароль некорректен'))
-        }
-        const token = generateJwt(author.id, author.name, author.email)
-        return res.json({token})
     }
     async check(req, res, next){
-        const token = generateJwt(req.author.id,req.author.name, req.author.email)
-        return res.json({token})
+        try {
+
+            const token = generateJwt(req.author.id, req.author.name, req.author.email)
+            return res.json({token})
+        }catch (e){
+            next(ApiError.badRequest(e.message))
+        }
     }
     async getAll(req, res){
-        let authors;
-        authors = await AppUser.findAll()
-        return res.json(authors)
+        try {
+            let users;
+            users = await AppUser.findAll()
+            return res.json(users)
+        }catch (e){
+            console.log(e);
+            return res.json({e})
+        }
     }
     async getOne(req, res){
-        const {id} = req.params
-        const user = await AppUser.findOne(
-            {where:{id}}
-        )
-        return res.json(user)
+        try {
+
+            const {id} = req.params
+            const user = await AppUser.findOne(
+                {where: {id}}
+            )
+            return res.json(user)
+        }catch (e){
+            next(ApiError.badRequest(e.message))
+        }
     }
     async update(req, res, next){
-        let {name, email, password} = req.body
-        const id = req.author.id;
-        const cur_author = await AppUser.findOne({where:{id}})
+        try {
+            let {name, email, password} = req.body
+            const id = req.author.id;
+            const cur_author = await AppUser.findOne({where: {id}})
 
-        if(email === undefined){
-            email = cur_author.email;
-        }else{
-            const candidate1 = await AppUser.findOne({where: {email}})
-            if(candidate1){
-                return next(ApiError.badRequest('Пользователь с таким email уже существует'))
+            if (email === undefined) {
+                email = cur_author.email;
+            } else {
+                const candidate1 = await AppUser.findOne({where: {email}})
+                if (candidate1) {
+                    return next(ApiError.badRequest('Пользователь с таким email уже существует'))
+                }
             }
+            if (!name) {
+                name = cur_author.name;
+            }
+            if (!password) {
+                password = cur_author.password;
+            }
+            const hashPassword = await bcrypt.hash(password, 5)
+            const appUser = await (await (AppUser.findOne(
+                {where: {id}},
+            ))).update({name: name, email: email, password: hashPassword},)
+            const token = generateJwt(id, name, email)
+            return res.json({token})
+        }catch (e){
+            next(ApiError.badRequest(e.message))
         }
-        if(!name){
-            name = cur_author.name;
-        }
-        if(!password){
-            password = cur_author.password;
-        }
-        const hashPassword = await bcrypt.hash(password, 5)
-        const appUser = await ( await (AppUser.findOne(
-            {where: {id}},
-        ))).update({name:name, email: email, password:hashPassword},)
-        const token = generateJwt(id, name, email)
-        return res.json({token})
     }
     async delete(req, res){
+        try{
         const {id} = req.params
-        const author = await AppUser.destroy(
+        const user = await AppUser.destroy(
             {where: {id}},
         )
-        return res.json(author)
+        return res.json(user)
+        }catch (e){
+            console.log(e);
+            return res.json({e})
+        }
     }
 }
 

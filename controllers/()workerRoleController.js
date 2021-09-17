@@ -25,21 +25,33 @@ class WorkerRoleController{
         }
     }
     async getAll(req, res) {
-        return await res.json(WorkerRole.findAll());
+        try {
+            return await res.json(WorkerRole.findAll());
+        }catch (e) {
+            console.log(e)
+        }
     }
     async getOne(req, res){
-        const {id} = req.params
-        const wr = await WorkerRole.findOne(
-            {where:{id}}
-        )
-        return res.json(wr)
+        try {
+            const {id} = req.params
+            const wr = await WorkerRole.findOne(
+                {where: {id}}
+            )
+            return res.json(wr)
+        }catch (e) {
+            console.log(e)
+        }
     }
     async delete(req, res) {
-        const {id} = req.params
-        const wr = await WorkerRole.destroy(
-            {where: {id}},
-        )
-        return res.json(wr)
+        try {
+            const {id} = req.params
+            const wr = await WorkerRole.destroy(
+                {where: {id}},
+            )
+            return res.json(wr)
+        }catch (e) {
+            console.log(e)
+        }
     }
 }
 module.exports = new WorkerRoleController();

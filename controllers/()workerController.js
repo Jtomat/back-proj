@@ -26,21 +26,33 @@ class WorkerController {
         }
     }
     async getAll(req, res) {
-        return await res.json(Worker.findAll());
+        try {
+            return await res.json(Worker.findAll());
+        }catch (e) {
+            console.log(e)
+        }
     }
     async getOne(req, res){
-        const {id} = req.params
-        const wr = await Worker.findOne(
-            {where:{id}}
-        )
-        return res.json(wr)
+        try {
+            const {id} = req.params
+            const wr = await Worker.findOne(
+                {where: {id}}
+            )
+            return res.json(wr)
+        }catch (e) {
+            console.log(e)
+        }
     }
     async delete(req, res) {
-        const {id} = req.params
-        const wr = await Worker.destroy(
-            {where: {id}},
-        )
-        return res.json(wr)
+        try {
+            const {id} = req.params
+            const wr = await Worker.destroy(
+                {where: {id}},
+            )
+            return res.json(wr)
+        }catch (e) {
+            console.log(e)
+        }
     }
 }
 
