@@ -4,8 +4,8 @@ const {Op} = require("sequelize")
 
 class WorkerController {
     async _create(req){
-        let { userId, workerRoleId } = req.body;
-        const wr = await Worker.create({userId, workerRoleId})
+        let { appUserId, workerRoleId } = req.body;
+        const wr = await Worker.create({appUserId, workerRoleId})
         return wr;
     }
     async _get(id){
@@ -28,7 +28,7 @@ class WorkerController {
             const {id} = req.params;
             let { userId, workerRoleId } = req.body;
             const cur_wr = await Worker.findOne({where:{id}});
-            const wr = await cur_wr.update({userId:userId, workerRoleId: workerRoleId});
+            const wr = await cur_wr.update({appUserId:userId, workerRoleId: workerRoleId});
             return res.json({wr});
         }
         catch (e){
