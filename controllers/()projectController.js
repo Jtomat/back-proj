@@ -30,6 +30,9 @@ class ProjectController {
     }
     async getAll(req, res) {
         let stages;
+        let worker;
+        let user;
+        let role;
         try {
             let result = await Project.findAll()
             for (let pr of result) {
@@ -37,9 +40,9 @@ class ProjectController {
                 for (let st of stages){
                     let task = await TaskController._get(st.id);
                     for (let t of task) {
-                        const worker = await WorkerController._get(t.workerId);
-                        const user = await UserController._get(worker.appuserId)
-                        const role = await WorkerRoleController._get(worker.workerRoleId)
+                        worker = await WorkerController._get(t.workerId);
+                        user = await UserController._get(worker.appuserId)
+                        role = await WorkerRoleController._get(worker.workerRoleId)
                         worker.user = user;
                         worker.workerRole = role;
                         task.worker = worker;
@@ -52,7 +55,7 @@ class ProjectController {
             return res.json(result);
         }catch (e) {
             console.log(e)
-            return res.json({e, stages})
+            return res.json({e, stages, worker, user, role})
         }
     }
     async _getAll(){
