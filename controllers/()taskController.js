@@ -30,12 +30,7 @@ class TaskController{
             console.log(e)
         }
     }
-    groupBy(xs, key) {
-        return xs.reduce(function(rv, x) {
-            (rv[x[key]] = rv[x[key]] || []).push(x);
-            return rv;
-        }, {});
-    };
+
 
     async _getAll(req, res) {
         let id ;
@@ -49,7 +44,13 @@ class TaskController{
             for (let t of task){
                 t.diff = (new Date(t.dateEnd) - new Date()).valueOf() % 3
             }
-            result = this.groupBy(task,'diff')
+            let groupBy = (xs, key) =>{
+                return xs.reduce(function(rv, x) {
+                    (rv[x[key]] = rv[x[key]] || []).push(x);
+                    return rv;
+                }, {});
+            };
+            result = groupBy(task,'diff')
             return res.json(result);
         }catch (e) {
             console.log(e)
