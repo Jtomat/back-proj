@@ -68,7 +68,6 @@ class ProjectController {
                        dateActualEnd:stages[st].dateActualEnd,
                        finished:stages[st].finished,
                        tasks:tsk});
-                    return res.json(stg)
                 }
                 rest.push({id:result[pr].id,name:result[pr].name, stages:stg});
             }
