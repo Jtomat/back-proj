@@ -43,6 +43,7 @@ class TaskController{
             task = (await Task.findAll()).filter(item=>item.workerId === worker.id)
             for (let t of task){
                 t.diff = (new Date(t.dateEnd) - new Date()).valueOf() % 3
+                t.worker = worker;
             }
             let groupBy = (xs, key) =>{
                 return xs.reduce(function(rv, x) {
