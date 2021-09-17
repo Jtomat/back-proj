@@ -16,7 +16,7 @@ class TaskController{
     }
     async getAll(req, res) {
         try {
-            let {workerId, stageId} = req.params;
+            let {workerId} = req.params;
             const props = Object.getOwnPropertyNames(req.params);
             const array = [];
             props.forEach((propName) => {
