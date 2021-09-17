@@ -52,10 +52,17 @@ class ProjectController {
                         workered = { ...workered, workerRole: role};
                         tsk.push({...task[t], worker:workered});
                     }
-                   stg.push({...stages[st], tasks:tsk});
-                    return  res.json(stg)
+                   stg.push({
+                       name:stages[st].name,
+                       id:stages[st].id ,
+                       dateEnd:stages[st].dateEnd,
+                       dateStart:stages[st].dateStart,
+                       dateActualEnd:stages[st].dateActualEnd,
+                       finished:stages[st].finished,
+                       tasks:tsk});
+                    return res.json(stg)
                 }
-                rest.push({...result[pr], stages:stg});
+                rest.push({id:result[pr].id,name:result[pr].name, stages:stg});
             }
             return res.json(rest);
         }catch (e) {
