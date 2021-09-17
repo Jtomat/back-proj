@@ -5,8 +5,8 @@ const {Op} = require("sequelize")
 class TaskController{
     async create(req, res, next) {
         try {
-            let { stageId, workerId, name } = req.body;
-            const task = await Task.create({stageId, workerId, name})
+            let { stageId, workerId, name, info, dateStart, dateEnd } = req.body;
+            const task = await Task.create({stageId, workerId, name, info, dateStart, dateEnd})
             return res.json(task)
         }
         catch (e){
