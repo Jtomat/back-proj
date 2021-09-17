@@ -44,13 +44,13 @@ class ProjectController {
                         worker = await WorkerController._get(task[t].workerId);
                         user = await UserController._get(worker.appuserId)
                         role = await WorkerRoleController._get(worker.workerRoleId)
-                        worker.user = user;
-                        worker.workerRole = role;
-                        task[t].worker = worker;
+                        worker = {...worker, user:user};
+                        worker = { ...worker, workerRole: role};
+                        task[t] = {...task[t], worker:worker};
                     }
-                    stages[st].tasks = task;
+                    stages[st] ={...stages[st], tasks:task};
                 }
-                result[pr].stages = stages;
+                result[pr] = {...result[pr], stages:stages};
             }
             return res.json(result);
         }catch (e) {
