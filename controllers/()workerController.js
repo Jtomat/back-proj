@@ -3,10 +3,15 @@ const {Worker} = require('../models/models')
 const {Op} = require("sequelize")
 
 class WorkerController {
+    async _create(req){
+        let { userId, workerRoleId } = req.body;
+        const wr = await Worker.create({userId, workerRoleId})
+        return wr;
+    }
+
     async create(req, res, next) {
         try {
-            let { userId, workerRoleId } = req.body;
-            const wr = await Worker.create({userId, workerRoleId})
+
             return res.json(wr)
         }
         catch (e){
