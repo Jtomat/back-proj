@@ -33,8 +33,9 @@ class ProjectController {
         let worker;
         let user;
         let role;
+        let result;
         try {
-            let result = await Project.findAll()
+            result = await Project.findAll()
             for (let pr of result) {
                 stages = await StageController._get(pr.id);
                 for (let st of stages){
@@ -55,7 +56,7 @@ class ProjectController {
             return res.json(result);
         }catch (e) {
             console.log(e)
-            return res.json({e, stages, worker, user, role})
+            return res.json({e, result, stages, worker, user, role})
         }
     }
     async _getAll(){
