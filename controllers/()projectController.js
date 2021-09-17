@@ -48,9 +48,17 @@ class ProjectController {
                         worker = await WorkerController._get(task[t].workerId);
                         user = await UserController._get(worker.appuserId)
                         role = await WorkerRoleController._get(worker.workerRoleId)
-                        let workered = {...worker, user:user};
-                        workered = { ...workered, workerRole: role};
-                        tsk.push({...task[t], worker:workered});
+                        let workered = {id:worker.id, user:user};
+                        workered = { id:workered.id, user: workered.user, workerRole: role};
+                        tsk.push({
+                            id: task[t].id,
+                            name: task[t].name,
+                            info: task[t].info,
+                            actDate: task[t].actDate,
+                            dateEnd: task[t].dateEnd,
+                            dateStart: task[t].dateStart,
+                            finished: task[t].finished,
+                            worker:workered});
                     }
                    stg.push({
                        name:stages[st].name,
@@ -64,7 +72,7 @@ class ProjectController {
                 }
                 rest.push({id:result[pr].id,name:result[pr].name, stages:stg});
             }
-            return res.json('???');
+            return res.json(rest);
         }catch (e) {
             console.log(e)
         }
