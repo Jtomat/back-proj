@@ -57,7 +57,7 @@ const ReportData = sequelize.define('report_data', {
 
 AppUser.hasMany(Worker)
 Worker.belongsTo(AppUser)
-Worker.hasMany(WorkerRole)
+Worker.belongsTo(WorkerRole)
 Project.hasMany(Stage)
 Stage.belongsTo(Project)
 Stage.belongsTo(OperReport)
