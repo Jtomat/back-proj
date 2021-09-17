@@ -52,7 +52,7 @@ class ProjectController {
             return res.json(result);
         }catch (e) {
             console.log(e)
-            return JSON.stringify({e, stages})
+            return res.json({e, stages})
         }
     }
     async _getAll(){
