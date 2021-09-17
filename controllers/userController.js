@@ -31,12 +31,12 @@ class UserController {
             let appUser = await AppUser.create({name, email, password: hashPassword})
             const defWorker = await WorkerController._create({ body:{appuserId: appUser.id, workerRoleId: 0}});
             const id = appUser.id;
-            appUser = AppUser.findOne(
+            appUser = await AppUser.findOne(
                 {where: {id}}
             )
             const token = generateJwt(appUser.id, name, email)
 
-            return res.json({token})
+            return res.json({access_token:token, name:appUser.name})
         }catch (e){
             next(ApiError.badRequest(e.message))
         }
@@ -53,7 +53,7 @@ class UserController {
                 return next(ApiError.internal('Пароль некорректен'))
             }
             const token = generateJwt(author.id, author.name, author.email)
-            return res.json({token})
+            return res.json({access_token:token, name:author.name})
         }catch (e){
             next(ApiError.badRequest(e.message))
         }
