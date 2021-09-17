@@ -1,6 +1,7 @@
 const ApiError = require('../error/ApiError');
 const {Task} = require('../models/models')
 const {Op} = require("sequelize")
+const {WorkerController: WorkerController} = require('/controllers/()workerController')
 
 class TaskController{
     async create(req, res, next) {
@@ -25,6 +26,28 @@ class TaskController{
             });
             const task = await Task.findAll({where: {[Op.and]: array}})
             return res.json(task);
+        }catch (e) {
+            console.log(e)
+        }
+    }
+    groupBy(xs, key) {
+        return xs.reduce(function(rv, x) {
+            (rv[x[key]] = rv[x[key]] || []).push(x);
+            return rv;
+        }, {});
+    };
+
+    async _getAll(req, res) {
+        try {
+            let result = {};
+            let {appuserId} = req.params;
+            const worker = WorkerController._get(appuserId);
+            const task = await Task.findAll({where: {[Op.and]: [{workerId: worker.id}]}})
+            for (const t of task){
+                t.diff = (new Date(t.dateEnd) - new Date()).valueOf() % 3
+            }
+            result = this.groupBy(task,'diff')
+            return res.json(result);
         }catch (e) {
             console.log(e)
         }

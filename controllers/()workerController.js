@@ -14,6 +14,14 @@ class WorkerController {
         )
         return wr
     }
+
+    async _getByUser(id){
+        const wr = await Worker.findOne(
+            {where: {[Op.and]: [{appuserId: id}]}}
+        )
+        return wr
+    }
+
     async create(req, res, next) {
         try {
 
