@@ -69,6 +69,10 @@ class TaskController{
         const task = await Task.findAll({where: {[Op.and]: array}})
         return task;
     }
+    async getForSt(req, res) {
+        const {id} = req.params
+        return this._get(id);
+    }
     async getOne(req, res) {
         try {
             const {id} = req.params
