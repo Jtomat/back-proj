@@ -64,7 +64,7 @@ class ProjectController {
                 }
                 rest.push({id:result[pr].id,name:result[pr].name, stages:stg});
             }
-            return res.json(rest);
+            return res.json('???');
         }catch (e) {
             console.log(e)
         }
