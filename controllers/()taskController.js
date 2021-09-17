@@ -1,7 +1,7 @@
 const ApiError = require('../error/ApiError');
 const {Task} = require('../models/models')
 const {Op} = require("sequelize")
-const {WorkerController: WorkerController} = require('./()workerController')
+const WorkerController = require('./()workerController')
 
 class TaskController{
     async create(req, res, next) {
