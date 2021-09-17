@@ -35,24 +35,27 @@ class ProjectController {
         let role;
         let result;
         try {
-            result = await Project.findAll()
+            result = (await Project.findAll());
+            res = [];
             for (let pr =0; pr< result.length; pr++) {
                 stages = await StageController._get(pr.id);
+                let stg = []
                 for (let st = 0; st < stages.length; st++){
                     let task = await TaskController._get(stages[st].id);
+                    let tsk = [];
                     for (let t =0;t< task.length;t++) {
                         worker = await WorkerController._get(task[t].workerId);
                         user = await UserController._get(worker.appuserId)
                         role = await WorkerRoleController._get(worker.workerRoleId)
-                        worker = {...worker, user:user};
-                        worker = { ...worker, workerRole: role};
-                        task[t] = {...task[t], worker:worker};
+                        let workered = {...worker, user:user};
+                        workered = { ...workered, workerRole: role};
+                        tsk.push({...task[t], worker:workered});
                     }
-                    stages[st] ={...stages[st], tasks:task};
+                   stg.push({...stages[st], tasks:tsk});
                 }
-                result[pr] = {...result[pr], stages:stages};
+                res.push({...result[pr], stages:stg});
             }
-            return res.json(result);
+            return res.json(res);
         }catch (e) {
             console.log(e)
             return res.json({e, result, stages, worker, user, role})
