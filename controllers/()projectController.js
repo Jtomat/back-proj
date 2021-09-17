@@ -1,10 +1,10 @@
 const ApiError = require('../error/ApiError');
 const {Project} = require('../models/models')
-const {StageController:StageController} = require('../controllers/()stageController');
-const {TaskController:TaskController} = require('../controllers/()taskController');
-const {WorkerController:WorkerController} = require('../controllers/()workerController');
-const {UserController:UserController} = require('../controllers/userController');
-const {WorkerRoleController:WorkerRoleController} = require('../controllers/()workerRoleController');
+const StageController = require('../controllers/()stageController');
+const TaskController = require('../controllers/()taskController');
+const WorkerController = require('../controllers/()workerController');
+const UserController = require('../controllers/userController');
+const WorkerRoleController = require('../controllers/()workerRoleController');
 
 class ProjectController {
     async create(req, res, next) {
