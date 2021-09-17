@@ -16,14 +16,20 @@ class WorkerController {
     }
 
     async _getByUser(appuserId){
-        const wr = await Worker.findOne({where: {appuserId:appuserId}})
+        const props = ['appuserId'];
+        const array = [];
+        props.forEach((propName) => {
+            let obj = {};
+            obj[propName.toString()] = appuserId;
+            array.push(obj);
+        });
+        const wr = await Worker.findOne({where: {where: {[Op.and]: array}}})
         return wr
     }
 
     async create(req, res, next) {
         try {
-
-            return res.json(wr)
+            return res.json(await this._create(req))
         }
         catch (e){
             next(ApiError.badRequest(e.message))
