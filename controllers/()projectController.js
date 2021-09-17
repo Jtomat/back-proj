@@ -114,7 +114,7 @@ class ProjectController {
                         const worker = await WorkerController._get(task.workerId);
                         let user = {};
                         if (worker) {
-                            user = await UserController._get(worker.userId);
+                            user = await UserController._get(worker.appuserId);
                         }
                         array.push([pr?.name, st?.name, task?.name, worker ? user?.name : "Отсутствует", task?.finished])
                     }
