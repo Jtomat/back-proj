@@ -6,10 +6,10 @@ const stageRouter = require('./()stageRouter')
 const taskRouter = require('./()taskRouter')
 
 
-router.use('/', userRouter);
 router.use('/project/', projectRouter);
-router.use('/', stageRouter);
-router.use('/', taskRouter);
+router.use('/stages/', stageRouter);
+router.use('/tasks/', taskRouter);
+router.use('/au/', userRouter);
     /*
 router.use('/publication', publicationRouter)
 router.use('/publicator', publicatorRouter)
