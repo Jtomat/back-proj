@@ -43,7 +43,7 @@ class WorkerRoleController{
         }
     }
     async _get(id){
-        return  (await WorkerRole.findAll());
+        return  (await WorkerRole.findAll()).filter(item=>item.id===id)[0];
 
     }
     async delete(req, res) {
