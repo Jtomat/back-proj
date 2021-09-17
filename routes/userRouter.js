@@ -14,6 +14,5 @@ router.delete('/remove/:id', authMiddleware, userController.delete)
 router.put('/conf/roles/:id', roleController.update)
 router.post('/conf/roles/', roleController.create)
 router.delete('/conf/roles/:id', roleController.delete)
-router.put('/conf/roles/:id', roleController.update)
 
 module.exports = router
