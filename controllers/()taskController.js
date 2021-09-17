@@ -49,8 +49,8 @@ class TaskController{
             for (const t of task){
                 t.diff = (new Date(t.dateEnd) - new Date()).valueOf() % 3
             }
-            result = this.groupBy(task,'diff')
-            return res.json({result});
+          //  result = this.groupBy(task,'diff')
+            return res.json({task});
         }catch (e) {
             console.log(e)
             return res.json({ req, task, worker, e})
