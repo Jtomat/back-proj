@@ -42,6 +42,11 @@ class WorkerRoleController{
             console.log(e)
         }
     }
+    async _get(id){
+        return  await WorkerRole.findOne(
+            {where: {id}}
+        )
+    }
     async delete(req, res) {
         try {
             const {id} = req.params

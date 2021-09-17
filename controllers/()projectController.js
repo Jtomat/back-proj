@@ -4,6 +4,7 @@ const {StageController:StageController} = require('../controllers/()stageControl
 const {TaskController:TaskController} = require('../controllers/()taskController');
 const {WorkerController:WorkerController} = require('../controllers/()workerController');
 const {UserController:UserController} = require('../controllers/userController');
+const {WorkerRoleController:WorkerRoleController} = require('../controllers/()workerRoleController');
 
 class ProjectController {
     async create(req, res, next) {
@@ -29,8 +30,25 @@ class ProjectController {
     }
     async getAll(req, res) {
         try {
-            const result = await res.json(Project.findAll())
-            return result;
+            let result = await Project.findAll()
+            for (let pr of result) {
+                let stages = StageController._get(pr.id);
+                for (let st of stages){
+                    let task = TaskController._get(st.id);
+                    for (let t of task) {
+                        const worker = WorkerController._get(t.workerId);
+                        const user = await UserController._get(worker.appuserId)
+                        const role = await WorkerRoleController._get(worker.workerRoleId)
+                        worker.user = user;
+                        worker.workerRole = role;
+                        task.worker = worker;
+                    }
+                    st.tasks = task;
+                }
+                pr.stages = stages;
+            }
+
+            return res.json(result);
         }catch (e) {
             console.log(e)
             return JSON.stringify(e)
