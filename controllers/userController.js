@@ -15,27 +15,31 @@ const generateJwt = (id,name, email) => {
 
 class UserController {
     async registration(req, res, next) {
-        const {name, email, password} = req.body
-        if (!password) {
-            return next(ApiError.badRequest('Некорректный password' + password))
-        }
-        if (!email) {
-            return next(ApiError.badRequest('Некорректный email' + email))
-        }
-        const candidate = await AppUser.findOne({where: {email}})
-        if (candidate) {
-            return next(ApiError.badRequest('Пользователь с таким email уже существует'))
-        }
-        const hashPassword = await bcrypt.hash(password, 5)
-        let appUser = await AppUser.create({name, email, password: hashPassword})
-        const defWorker = WorkerController.create({userId: user.id, workerRoleId: 0}, {}, {});
-        const id = appUser.id;
-        appUser = AppUser.findOne(
-            {where:{id}}
-        )
-        const token = generateJwt(appUser.id, name, email)
+        try {
+            const {name, email, password} = req.body
+            if (!password) {
+                return next(ApiError.badRequest('Некорректный password' + password))
+            }
+            if (!email) {
+                return next(ApiError.badRequest('Некорректный email' + email))
+            }
+            const candidate = await AppUser.findOne({where: {email}})
+            if (candidate) {
+                return next(ApiError.badRequest('Пользователь с таким email уже существует'))
+            }
+            const hashPassword = await bcrypt.hash(password, 5)
+            let appUser = await AppUser.create({name, email, password: hashPassword})
+            const defWorker = WorkerController.create({userId: user.id, workerRoleId: 0}, {}, {});
+            const id = appUser.id;
+            appUser = AppUser.findOne(
+                {where: {id}}
+            )
+            const token = generateJwt(appUser.id, name, email)
 
-        return res.json({token})
+            return res.json({token})
+        }catch (e){
+            throw e;
+        }
     }
     async login(req, res, next){
         const {email, password} = req.body
