@@ -1,0 +1,172 @@
+    # Count_Vect SVC
+    #               precision    recall  f1-score   support
+    #
+    #      untoxic      0.780     0.954     0.858      9473
+    #        toxic      0.819     0.438     0.571      4527
+    #
+    #     accuracy                          0.787     14000
+    #    macro avg      0.800     0.696     0.715     14000
+    # weighted avg      0.793     0.787     0.765     14000
+    #
+    # Count_Vect + TFIDF SVC
+    #               precision    recall  f1-score   support
+    #
+    #      untoxic      0.790     0.943     0.860      9473
+    #        toxic      0.800     0.474     0.596      4527
+    #
+    #     accuracy                          0.792     14000
+    #    macro avg      0.795     0.709     0.728     14000
+    # weighted avg      0.793     0.792     0.774     14000
+    #
+    #  Count_Vect MNB
+    #                   precision    recall  f1-score   support
+    #
+    #      untoxic      0.732     0.984     0.839      9473
+    #        toxic      0.878     0.247     0.385      4527
+    #
+    #     accuracy                          0.745     14000
+    #    macro avg      0.805     0.615     0.612     14000
+    # weighted avg      0.779     0.745     0.692     14000
+    #
+    #              Count_Vect NBSVM
+    #                   precision    recall  f1-score   support
+    #
+    #      untoxic      0.779     0.956     0.859      9473
+    #        toxic      0.825     0.433     0.568      4527
+    #
+    #     accuracy                          0.787     14000
+    #    macro avg      0.802     0.694     0.713     14000
+    # weighted avg      0.794     0.787     0.765     14000
+    #           Count_Vect TFIDF NBSVM
+    # precision    recall  f1-score   support
+    #
+    #      untoxic      0.788     0.945     0.860      9473
+    #        toxic      0.803     0.468     0.591      4527
+    #
+    #     accuracy                          0.791     14000
+    #    macro avg      0.796     0.707     0.725     14000
+    # weighted avg      0.793     0.791     0.773     14000
+    #
+    #       Count_vect RandomForest
+    #                   precision    recall  f1-score   support
+    #
+    #      untoxic      0.737     0.986     0.844      9473
+    #        toxic      0.902     0.265     0.410      4527
+    #
+    #     accuracy                          0.753     14000
+    #    macro avg      0.820     0.626     0.627     14000
+    # weighted avg      0.791     0.753     0.704     14000
+    #
+    #               Doc2Vec SVC
+    #                   precision    recall  f1-score   support
+    #
+    #      untoxic      0.881     0.902     0.892      9473
+    #        toxic      0.784     0.745     0.764      4527
+    #
+    #     accuracy                          0.851     14000
+    #    macro avg      0.833     0.824     0.828     14000
+    # weighted avg      0.850     0.851     0.850     14000
+    #
+    #       Doc2Vec RandomForest
+    #                   precision    recall  f1-score   support
+    #
+    #      untoxic      0.864     0.915     0.889      9473
+    #        toxic      0.797     0.698     0.744      4527
+    #
+    #     accuracy                          0.845     14000
+    #    macro avg      0.831     0.807     0.817     14000
+    # weighted avg      0.842     0.845     0.842     14000
+    #           Doc2Vec MNB
+    #                 precision    recall  f1-score   support
+    #
+    #      untoxic      0.864     0.864     0.864      9473
+    #        toxic      0.716     0.715     0.715      4527
+    #
+    #     accuracy                          0.816     14000
+    #    macro avg      0.790     0.790     0.790     14000
+    # weighted avg      0.816     0.816     0.816     14000
+    #     Doc2Vec NBSVM
+    #                 precision    recall  f1-score   support
+    #
+    #      untoxic      0.881     0.902     0.891      9473
+    #        toxic      0.784     0.744     0.763      4527
+    #
+    #     accuracy                          0.851     14000
+    #    macro avg      0.832     0.823     0.827     14000
+    # weighted avg      0.849     0.851     0.850     14000
+    #           Word2Vec SVC
+    #                   precision    recall  f1-score   support
+    #
+    #      untoxic  0.870     0.937     0.902          9473
+    #        toxic  0.842     0.707     0.769          4527
+    #
+    #     accuracy                      0.862         14000
+    #    macro avg  0.856     0.822     0.835         14000
+    # weighted avg  0.861     0.862     0.859         14000
+    #               Word2Vec MNB
+    #               precision    recall  f1-score   support
+    #
+    #      untoxic      0.894     0.894     0.894      9473
+    #        toxic      0.778     0.779     0.778      4527
+    #
+    #     accuracy                          0.857     14000
+    #    macro avg      0.836     0.836     0.836     14000
+    # weighted avg      0.857     0.857     0.857     14000
+    #       Word2Vec NBSVM
+    #               precision    recall  f1-score   support
+    #
+    #      untoxic  0.871     0.938     0.903          9473
+    #        toxic  0.846     0.709     0.771          4527
+    #
+    #     accuracy                      0.864         14000
+    #    macro avg  0.858     0.823     0.837         14000
+    # weighted avg  0.863     0.864     0.860         14000
+    #       Word2Vec Random Forest
+    #              precision    recall  f1-score   support
+    #
+    #      untoxic  0.855     0.936     0.894          9473
+    #        toxic  0.834     0.668     0.742          4527
+    #
+    #     accuracy                      0.849         14000
+    #    macro avg  0.844     0.802     0.818         14000
+    # weighted avg  0.848     0.849     0.844         14000
+    #
+    #           FastText  SVC (!!!)
+    #               precision    recall  f1-score   support
+    #
+    #      untoxic      0.883     0.931     0.906      9473
+    #        toxic      0.837     0.742     0.786      4527
+    #
+    #     accuracy                          0.870     14000
+    #    macro avg      0.860     0.836     0.846     14000
+    # weighted avg      0.868     0.870     0.867     14000
+    #
+    #       FastText MNB
+    #                  precision    recall  f1-score   support
+    #
+    #      untoxic      0.899     0.880     0.889      9473
+    #        toxic      0.760     0.792     0.776      4527
+    #
+    #     accuracy                          0.852     14000
+    #    macro avg      0.829     0.836     0.832     14000
+    # weighted avg      0.854     0.852     0.853     14000
+    #
+    #        FastText NBSVM
+    #                   precision    recall  f1-score   support
+    #
+    #      untoxic      0.878     0.933     0.904      9473
+    #        toxic      0.838     0.728     0.779      4527
+    #
+    #     accuracy                          0.867     14000
+    #    macro avg      0.858     0.830     0.842     14000
+    # weighted avg      0.865     0.867     0.864     14000
+    #      
+    #       FastText RFC
+    #               precision    recall  f1-score   support
+    # 
+    #      untoxic      0.854     0.949     0.899      9473
+    #        toxic      0.861     0.662     0.748      4527
+    # 
+    #     accuracy                          0.856     14000
+    #    macro avg      0.858     0.805     0.824     14000
+    # weighted avg      0.857     0.856     0.850     14000
