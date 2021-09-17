@@ -59,14 +59,7 @@ class TaskController{
         }
     }
     async _get(id){
-        const props = ['stageId'];
-        const array = [];
-        props.forEach((propName) => {
-            let obj = {};
-            obj[propName.toString()] = id;
-            array.push(obj);
-        });
-        const task = await Task.findAll({where: {[Op.and]: array}})
+        const task = (await Task.findAll()).filter(item=>item.stageId===id)
         return task;
     }
     async getForSt(req, res) {
