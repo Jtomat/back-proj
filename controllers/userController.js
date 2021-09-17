@@ -2,7 +2,7 @@ require('dotenv').config()
 const ApiError = require('../error/ApiError')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const {User: AppUser} = require('../models/models')
+const {AppUser: AppUser} = require('../models/models')
 const WorkerController = require('../controllers/()workerController')
 
 const generateJwt = (id,name, email) => {
