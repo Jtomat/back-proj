@@ -60,7 +60,7 @@ class ProjectController {
             return res.json(rest);
         }catch (e) {
             console.log(e)
-            return res.json({e, result, stages, worker, user, role})
+            return res.json({e})
         }
     }
     async _getAll(){
