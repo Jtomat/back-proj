@@ -19,14 +19,7 @@ class StageController{
     async getAll(req, res) {
         try {
             let {projectId} = req.params;
-            const props = ['projectId'];
-            const array = [];
-            props.forEach((propName) => {
-                let obj = {};
-                obj[propName.toString()] = req.params[propName];
-                array.push(obj);
-            });
-            const stages = await Stage.findAll({where: {[Op.and]: array}})
+            const stages = (await Stage.findAll()).filter(item=>item.projectId===projectId)
             return res.json(stages);
         }catch (e) {
             console.log(e)
@@ -44,14 +37,7 @@ class StageController{
         }
     }
     async _get(id){
-        const props = ['projectId'];
-        const array = [];
-        props.forEach((propName) => {
-            let obj = {};
-            obj[propName.toString()] = id;
-            array.push(obj);
-        });
-        const stages = await Stage.findAll({where: {[Op.and]: array}})
+        const stages = (await Stage.findAll()).filter(item=>item.projectId === id)
         return stages;
     }
     async update(req, res, next) {
