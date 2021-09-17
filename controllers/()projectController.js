@@ -29,7 +29,8 @@ class ProjectController {
     }
     async getAll(req, res) {
         try {
-            return await res.json(Project.findAll());
+            const result = await res.json(Project.findAll())
+            return result;
         }catch (e) {
             console.log(e)
             return JSON.stringify(e)
