@@ -58,6 +58,12 @@ class UserController {
             next(ApiError.badRequest(e.message))
         }
     }
+    async _get(id){
+        const wr = await AppUser.findOne(
+            {where: {id}}
+        )
+        return wr
+    }
     async check(req, res, next){
         try {
 

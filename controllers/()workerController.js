@@ -8,7 +8,12 @@ class WorkerController {
         const wr = await Worker.create({userId, workerRoleId})
         return wr;
     }
-
+    async _get(id){
+        const wr = await Worker.findOne(
+            {where: {id}}
+        )
+        return wr
+    }
     async create(req, res, next) {
         try {
 

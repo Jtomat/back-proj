@@ -1,5 +1,9 @@
 const ApiError = require('../error/ApiError');
 const {Project} = require('../models/models')
+const {StageController:StageController} = require('../controllers/()stageController');
+const {TaskController:TaskController} = require('../controllers/()taskController');
+const {WorkerController:WorkerController} = require('../controllers/()workerController');
+const {UserController:UserController} = require('../controllers/userController');
 
 class ProjectController {
     async create(req, res, next) {
@@ -26,6 +30,9 @@ class ProjectController {
     async getAll(req, res) {
        return await res.json(Project.findAll());
     }
+    async _getAll(){
+        return Project.findAll()
+    }
     async update(req, res, next){
         try{
             const {id} = req.params;
@@ -48,6 +55,26 @@ class ProjectController {
         }catch (e) {
             console.log(e)
         }
+    }
+
+    async excel(req, res){
+        const array = [[ "Проект", "Стадии", "Задачи","Сотрудник", "%"],];
+        const projects = await this._getAll();
+        for (const pr of projects) {
+           const sts = await StageController._get(pr.id);
+           for (const st of sts){
+               const tasks = await TaskController._get(st.id);
+               for (const task of tasks) {
+                   const worker = await WorkerController._get(task.workerId);
+                   let user = {};
+                   if (worker){
+                       user = await UserController._get(worker.userId);
+                   }
+                   array.push([pr.name, st.name, task.name, worker ? user.name : "Отсутствует", task.finished ])
+               }
+           }
+        }
+        return res.json(array);
     }
 }
 module.exports = new ProjectController()

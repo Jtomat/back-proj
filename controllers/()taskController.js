@@ -29,6 +29,17 @@ class TaskController{
             console.log(e)
         }
     }
+    async _get(id){
+        const props = ['stageId'];
+        const array = [];
+        props.forEach((propName) => {
+            let obj = {};
+            obj[propName.toString()] = id;
+            array.push(obj);
+        });
+        const task = await Task.findAll({where: {[Op.and]: array}})
+        return task;
+    }
     async getOne(req, res) {
         try {
             const {id} = req.params

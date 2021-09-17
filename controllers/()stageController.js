@@ -43,6 +43,17 @@ class StageController{
             console.log(e)
         }
     }
+    async _get(id){
+        const props = ['projectId'];
+        const array = [];
+        props.forEach((propName) => {
+            let obj = {};
+            obj[propName.toString()] = id;
+            array.push(obj);
+        });
+        const stages = await Stage.findAll({where: {[Op.and]: array}})
+        return stages;
+    }
     async update(req, res, next) {
         try{
             const {id} = req.params;
