@@ -37,7 +37,7 @@ class StageController{
         }
     }
     async _get(id){
-        const stages = (await Stage.findAll())
+        const stages = (await Stage.findAll()).filter(item=>item.projectId === id)
         return stages;
     }
     async update(req, res, next) {
