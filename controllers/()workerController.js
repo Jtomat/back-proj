@@ -50,7 +50,7 @@ class WorkerController {
             for(let worker in workers){
                 const user = (await AppUser.findOne({where: {id: workers[worker].appuserId}}));
                 const role = (await WorkerRole.findOne({where:{id: workers[worker].workerRoleId}}));
-                result.push({...workers[worker], user, role})
+                result.push({id:workers[worker].id, user, role})
             }
             return res.json(result);
         }catch (e) {
