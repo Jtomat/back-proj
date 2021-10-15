@@ -36,7 +36,7 @@ class UserController {
             )
             const token = generateJwt(appUser.id, name, email)
 
-            return res.json({access_token:token, name:appUser.id})
+            return res.json({access_token:token, name:appUser.name, id: appUser.id})
         }catch (e){
             next(ApiError.badRequest(e.message))
         }
