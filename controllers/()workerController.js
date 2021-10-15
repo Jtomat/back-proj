@@ -49,7 +49,7 @@ class WorkerController {
                 workers.user = (await userController._getAll()).filter(user=>user.id===worker.appuserId)[0];
                 workers.role = (await WorkerRole._getAll()).filter(user=>user.id===worker.workerRoleId)[0];
             }
-            return workers;
+            return  await res.json(Worker.findAll());
         }catch (e) {
             console.log(e)
         }
