@@ -45,7 +45,7 @@ class WorkerController {
     }
     async getAll(req, res) {
         try {
-            const workers = (await Worker.findAll()).concat();
+            const workers = (await Worker.findAll());
             for(let worker in workers){
                 console.log(worker)
                 worker.user = (await AppUser.findOne({where: {id: worker.appuserId}}));
