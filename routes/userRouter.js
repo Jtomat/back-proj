@@ -16,5 +16,6 @@ router.put('/conf/roles/:id', roleController.update)
 router.post('/conf/roles/', roleController.create)
 router.delete('/conf/roles/:id', roleController.delete)
 router.put('/conf/worker/upd/:id', workerController.update)
+router.get('/conf/worker/', workerController.getAll)
 
 module.exports = router

@@ -81,6 +81,17 @@ class UserController {
             return res.json({e})
         }
     }
+    async _getAll(){
+        try {
+            let users;
+            users = await AppUser.findAll()
+            return users
+        }catch (e){
+            console.log(e);
+            return {e}
+        }
+    }
+
     async getOne(req, res){
         try {
 

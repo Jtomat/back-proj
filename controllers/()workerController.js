@@ -1,5 +1,7 @@
 const ApiError = require('../error/ApiError');
 const {Worker} = require('../models/models')
+const {WorkerRole} = require('../models/models')
+const userController = require('../controllers/userController')
 const {Op} = require("sequelize")
 
 class WorkerController {
@@ -42,7 +44,12 @@ class WorkerController {
     }
     async getAll(req, res) {
         try {
-            return await res.json(Worker.findAll());
+            const workers = await res.json(Worker.findAll());
+            for(let worker in workers){
+                workers.user = (await userController._getAll()).filter(user=>user.id===worker.appuserId)[0];
+                workers.role = (await WorkerRole._getAll()).filter(user=>user.id===worker.workerRoleId)[0];
+            }
+            return workers;
         }catch (e) {
             console.log(e)
         }
