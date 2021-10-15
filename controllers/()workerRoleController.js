@@ -26,7 +26,7 @@ class WorkerRoleController{
     }
     async getAll(req, res) {
         try {
-            return await res.json(WorkerRole.findAll());
+            return  res.json(await WorkerRole.findAll());
         }catch (e) {
             console.log(e)
         }
