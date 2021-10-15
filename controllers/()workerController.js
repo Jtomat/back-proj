@@ -46,10 +46,10 @@ class WorkerController {
     async getAll(req, res) {
         try {
             const workers = await Worker.findAll();
-            for(let worker in workers){
+            /*for(let worker in workers){
                 worker.user = (await AppUser.findOne({where: {id: worker.appuserId}}));
                 worker.role = (await WorkerRole.findAll()).filter(user=>user.id===worker.workerRoleId)[0];
-            }
+            }*/
             return res.json(workers);
         }catch (e) {
             console.log(e)
