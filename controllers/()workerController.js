@@ -47,7 +47,7 @@ class WorkerController {
         try {
             const workers = await Worker.findAll();
             for(let worker in workers){
-                worker.user = (await AppUser.findAll()).filter(user=>user.id===worker.appuserId)[0];
+                worker.user = (await AppUser.findOne({where: {id: worker.appuserId}}));
                 worker.role = (await WorkerRole.findAll()).filter(user=>user.id===worker.workerRoleId)[0];
             }
             return res.json(workers);
