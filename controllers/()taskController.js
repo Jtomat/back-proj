@@ -42,17 +42,9 @@ class TaskController{
             worker = await WorkerController._getByUser(id.id);
             task = (await Task.findAll()).filter(item=>item.workerId === worker.id)
             for (let t of task){
-                t.diff = (new Date(t.dateEnd) - new Date()).valueOf() % 3
                 t.worker = worker;
             }
-            let groupBy = (xs, key) =>{
-                return xs.reduce(function(rv, x) {
-                    (rv[x[key]] = rv[x[key]] || []).push(x);
-                    return rv;
-                }, {});
-            };
-            result = groupBy(task,'diff')
-            return res.json(result);
+            return res.json(task);
         }catch (e) {
             console.log(e)
             return res.json({ req, task, worker, e})
