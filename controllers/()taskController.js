@@ -80,9 +80,9 @@ class TaskController{
     async update(req, res, next) {
         try{
             const {id} = req.params;
-            let {  workerId, name, finished } = req.body;
+            let {  workerId, name, finished, info } = req.body;
             const cur_task = await Task.findOne({where:{id}});
-            const task = await cur_task.update({name:name, workerId: workerId, finished: finished});
+            const task = await cur_task.update({name:name, info: info, workerId: workerId, finished: finished});
             return res.json({task});
         }
         catch (e){
